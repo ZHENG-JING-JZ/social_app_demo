@@ -1,10 +1,15 @@
 class PostsController < ApplicationController
+  include Pagy::Backend
   before_action :set_post, only: %w[ show edit update destroy ]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if params[:user_id].present?
+      @pagy, @posts = pagy Post.find_by(user_id: params[:user_id])
+    else
+      @pagy, @posts = pagy Post.all
+    end
   end
 
   # GET /posts/1
