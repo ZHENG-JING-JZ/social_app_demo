@@ -1,29 +1,23 @@
 class PostsController < ApplicationController
   include Pagy::Backend
-  before_action :set_post, only: %w[ show edit update destroy ]
+  before_action :set_post, only: :destroy
+  before_action :authenticate_user!, except: :index
 
   # GET /posts
   # GET /posts.json
   def index
+    @show_time = false
     if params[:user_id].present?
-      @pagy, @posts = pagy Post.find_by(user_id: params[:user_id])
+      @pagy, @posts = pagy Post.where(user_id: params[:user_id])
+      @show_time = true
     else
       @pagy, @posts = pagy Post.all
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
-  def show
-  end
-
   # GET /posts/new
   def new
     @post = Post.new
-  end
-
-  # GET /posts/1/edit
-  def edit
   end
 
   # POST /posts
@@ -37,20 +31,6 @@ class PostsController < ApplicationController
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /posts/1
-  # PATCH/PUT /posts/1.json
-  def update
-    respond_to do |format|
-      if @post.update(post_params)
-        format.html { redirect_to @post, notice: "Post was successfully updated." }
-        format.json { render :show, status: :ok, location: @post }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
