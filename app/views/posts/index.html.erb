@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
+<h1><%= link_to 'Posts', posts_path %></h1>
 
 <div><%= link_to 'Manage my posts', posts_path(user_id: current_user.id) if current_user.present? %></div>
 
@@ -19,6 +19,7 @@
         <% if @show_time %>
           <td><%= post.created_at %></td>
         <% end %>
+        <td><%= "#{post.number_of_likes} likes" %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if current_user&.id == post.user_id %></td>
       </tr>
     <% end %>
