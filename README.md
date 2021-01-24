@@ -15,3 +15,6 @@ This is a simple demo of a social media app. User can create an account or read 
 * Posts are paginated 5 per page
 * A user can delete his own post
 * A user can go to manage posts page to see his own posts only
+* A user can like or unlike a post after logging in
+* A user can only like a post once
+* If a user like or unlike a post, the app should return to the same page after redirection

@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   def index
     @show_time = false
     if params[:user_id].present?
-      @pagy, @posts = pagy Post.includes(:likes).where("post.user_id = #{params[:user_id]}").order('posts.created_at DESC')
+      @pagy, @posts = pagy Post.includes(:likes).where("posts.user_id = #{params[:user_id]}").order('posts.created_at DESC')
       @show_time = true
     else
       @pagy, @posts = pagy Post.includes(:likes).order('posts.created_at DESC')
