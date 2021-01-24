@@ -1,24 +1,17 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a simple demo of a social media app. User can create an account or read posts as a guest.
 
-Things you may want to cover:
+## How to run the app
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Install ruby 2.7.1 and node higher than 10.17
+* User bundler to install gems
+* Create sqlite database for the app
+* Run migration and seed data
+* Open localhost:3000/
+* Sign up a new account or Log in with test accounts in seeds.rb
+* Or read the posts as a guest
+* A user can read all the posts with the newest created at front
+* Posts are paginated 5 per page
+* A user can delete his own post
+* A user can go to manage posts page to see his own posts only

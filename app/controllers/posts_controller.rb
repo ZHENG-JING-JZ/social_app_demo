@@ -8,10 +8,10 @@ class PostsController < ApplicationController
   def index
     @show_time = false
     if params[:user_id].present?
-      @pagy, @posts = pagy Post.where(user_id: params[:user_id])
+      @pagy, @posts = pagy Post.where(user_id: params[:user_id]).order('created_at DESC')
       @show_time = true
     else
-      @pagy, @posts = pagy Post.all
+      @pagy, @posts = pagy Post.all.order('created_at DESC')
     end
   end
 
@@ -27,8 +27,8 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @post }
+        format.html { redirect_to posts_path, notice: "Post was successfully created." }
+        format.json { render :index }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @post.errors, status: :unprocessable_entity }
@@ -54,6 +54,6 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.fetch(:post, {})
+      params.fetch(:post,{}).permit(:content, :user_id)
     end
 end

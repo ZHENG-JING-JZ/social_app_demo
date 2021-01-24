@@ -29,4 +29,8 @@
 
 <br>
 
-<%= link_to 'New Post', new_post_path if current_user.present? %>
+<% if current_user.present? %>
+  <%= link_to 'New Post', new_post_path %>
+<% else %>
+  <%= link_to 'Back to welcome page', root_path %>
+<% end %>
