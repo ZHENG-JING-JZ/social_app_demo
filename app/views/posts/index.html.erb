@@ -18,8 +18,9 @@
         <td><%= post.user&.name %></td>
         <% if @show_time %>
           <td><%= post.created_at %></td>
+        <% else %>
+          <td><%= path_of_like(post, @pagy.page) %></td>
         <% end %>
-        <td><%= path_of_like(post, @pagy.page) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } if current_user&.id == post.user_id %></td>
       </tr>
     <% end %>
